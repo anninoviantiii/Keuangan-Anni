@@ -83,17 +83,18 @@ function home() {
     ins += `<p>Rata-rata pengeluaran harian: <b>${rp(O / days)}</b></p>`;
   }
   if (prevO) { const d = (O - prevO) / prevO * 100; ins += `<p>Pengeluaran <b class="${d > 0 ? 'out' : 'in'}">${d > 0 ? 'naik' : 'turun'} ${Math.abs(Math.round(d))}%</b> dibanding periode sebelumnya (${rp(prevO)})</p>`; }
+  const rk = `<h2>Saldo rekening · ${rp(tot)}</h2>` + (sr.length ? `<div class="rek">${sr.map(x => `<div><small>${esc(x.rek)}</small><b class="num">${rp(x.v)}</b></div>`).join('')}</div>` : '<div class="card empty">Sheet "Saldo Awal" masih kosong. Jalankan fungsi setup() di Apps Script.</div>');
   $('#app').innerHTML = `
   <div class="hero"><small>Saldo bersih periode ini</small><div class="big num">${rp(I - O)}</div>
    <div class="row"><div><small>Pemasukan</small><b class="num">${rp(I)}</b></div><div><small>Pengeluaran</small><b class="num">${rp(O)}</b></div></div></div>
+  ${rk}
   <div class="per">${[['hari','Hari ini'],['minggu','Minggu ini'],['bulan','Bulan ini'],['kustom','Kustom']].map(([k, l]) => `<button class="${per === k ? 'on' : ''}" data-p="${k}">${l}</button>`).join('')}</div>
   ${per === 'kustom' ? `<div class="flt" style="margin-top:8px"><input type="date" id="cs" value="${cs}"><input type="date" id="ce" value="${ce}"></div>` : ''}
   <h2>Pemasukan vs pengeluaran</h2>
   <div class="card">${I + O ? `<div class="cmp"><i style="width:${pct}%;background:var(--in)"></i><i style="width:${100 - pct}%;background:var(--out)"></i></div><div class="mut">${Math.round(pct)}% pemasukan, ${Math.round(100 - pct)}% pengeluaran</div>` : '<div class="empty">Belum ada transaksi di periode ini.<br>Ketuk + untuk mencatat.</div>'}</div>
   ${I + O ? trend(s, e, days, inn, out) : ''}
   ${cl.length ? `<h2>Pengeluaran per kategori</h2><div class="card">${cl.map(([k, v]) => `<div class="bar"><div class="t"><span>${esc(k)}</span><b class="num">${rp(v)}</b></div><div class="b"><i style="width:${v / cl[0][1] * 100}%"></i></div></div>`).join('')}</div><h2>Insight</h2><div class="card ins">${ins}</div>` : ''}
-  <h2>Saldo rekening · ${rp(tot)}</h2>
-  <div class="rek">${sr.map(x => `<div><small>${esc(x.rek)}</small><b class="num">${rp(x.v)}</b></div>`).join('')}</div>`;
+`;
 }
 
 function hist() {
