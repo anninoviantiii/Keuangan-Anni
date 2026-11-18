@@ -2,7 +2,7 @@
 const API = 'https://script.google.com/macros/s/AKfycbzIITI5i-5W7iYFFPLHSQZnUL9T-AhI6uye1H3D8izdF6mWTBI5MHaZ4AAjwg804wD-og/exec';
 const CID = '1096810601489-i3tq2bkkbcapl43ojr9bl5eqc43ebhue.apps.googleusercontent.com';
 // ===========================
-const REK = ['Jago','BCA','BNI','Mandiri','GoPay','OVO','ShopeePay'];
+const REK = ['Jago','BCA','BNI','Mandiri','GoPay','OVO','ShopeePay','Jago Nabung'];
 const CAT = {out:['Makan','Transport','Belanja','Tagihan','Kesehatan','Hiburan','Pendidikan','Lainnya'], in:['Gaji','Hibah/Proyek','Freelance','Lainnya']};
 const $ = s => document.querySelector(s);
 const rp = n => (n < 0 ? '-' : '') + 'Rp ' + Math.abs(Math.round(n)).toLocaleString('id-ID');
